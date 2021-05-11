@@ -1,6 +1,6 @@
 <template>
   <div class="home-book">
-    <div class="home-book-header">{{title}}</div>
+    <div class="home-book-header" v-if="showTitle">{{title}}</div>
     <div class="home-book-content">
       <div class="home-book-row" v-for="(item,index) in bookData" :key="index">
         <div

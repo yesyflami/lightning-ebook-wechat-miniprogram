@@ -142,7 +142,9 @@
         console.log('Banner Click!')
       },
       onCategoryMoreClick () {
-        console.log('More Click')
+        this.$router.push({
+          path: '/pages/categoryList/main'
+        })
       },
       onHomeBookClick (book) {
         console.log(book)

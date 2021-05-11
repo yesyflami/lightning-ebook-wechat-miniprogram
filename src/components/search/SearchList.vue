@@ -4,26 +4,25 @@
       icon="apps-o"
       :title="category"
       sub-title="Category"
-      @onClick="showList(category.title, 'category')"
+      @onClick="showList(category, 'category')"
       v-if="category"
     />
     <SearchItem
       icon="user-o"
       :title="author"
       sub-title="Author"
-      @onClick="showList(author.title, 'author')"
+      @onClick="showList(author, 'author')"
       v-if="author"
     />
     <SearchItem
       icon="newspaper-o"
       :title="publisher"
       sub-title="Publisher"
-      @onClick="showList(publisher.title, 'publisher')"
+      @onClick="showList(publisher, 'publisher')"
       v-if="publisher"
     />
     <SearchTable
       :data="data.book"
-      @onClick="onBookClick"
     />
   </div>
 </template>
@@ -62,6 +61,12 @@
     methods: {
       showList (text, key) {
         console.log(text, key)
+        this.$router.push({
+          path: '/pages/list/main',
+          query: {
+            text, key, title: text
+          }
+        })
       },
       onBookClick (book) {
         console.log(book)
