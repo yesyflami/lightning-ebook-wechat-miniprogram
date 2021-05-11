@@ -7,6 +7,7 @@
       mode="category"
       :show-btn="false"
       :show-title="false"
+      @onBookClick="onCategoryClick"
     />
   </div>
 </template>
@@ -19,6 +20,18 @@
     data () {
       return {
         category: []
+      }
+    },
+    methods: {
+      onCategoryClick (category) {
+        this.$router.push({
+          path: '/pages/list/main',
+          query: {
+            key: 'categoryId',
+            text: category.category,
+            title: category.categoryText
+          }
+        })
       }
     },
     mounted () {

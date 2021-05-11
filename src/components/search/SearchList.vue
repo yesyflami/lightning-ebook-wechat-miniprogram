@@ -60,7 +60,6 @@
     },
     methods: {
       showList (text, key) {
-        console.log(text, key)
         this.$router.push({
           path: '/pages/list/main',
           query: {

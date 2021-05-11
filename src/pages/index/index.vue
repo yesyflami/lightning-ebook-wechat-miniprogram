@@ -61,7 +61,7 @@
           mode="category"
           btn-text="查看全部"
           @onMoreClick="onCategoryMoreClick"
-          @onBookClick="onHomeBookClick"
+          @onBookClick="onCategoryClick"
         />
       </div>
     </div>
@@ -140,6 +140,16 @@
       },
       onBannerClick () {
         console.log('Banner Click!')
+      },
+      onCategoryClick (category) {
+        this.$router.push({
+          path: '/pages/list/main',
+          query: {
+            key: 'categoryId',
+            text: category.category,
+            title: category.categoryText
+          }
+        })
       },
       onCategoryMoreClick () {
         this.$router.push({

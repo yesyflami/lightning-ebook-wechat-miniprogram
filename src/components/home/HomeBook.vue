@@ -11,7 +11,7 @@
         >
           <div class="book-wrapper"
                :style="{flexDirection: mode === HOME_BOOK_MODE.COL ? 'column' : 'row'}"
-               @click="onBookClick"
+               @click="onBookClick(book)"
                v-if="mode === HOME_BOOK_MODE.COL || mode === HOME_BOOK_MODE.ROW"
           >
             <ImageView
@@ -32,7 +32,7 @@
               </div>
             </div>
           </div>
-          <div class="category-wrapper" v-else>
+          <div class="category-wrapper" @click="onBookClick(book)" v-else>
             <div class="category-text">{{book.text}}</div>
             <div class="category-num">{{book.num}}本书</div>
             <div class="category-img-wrapper">
@@ -128,8 +128,8 @@
       onMoreClick () {
         this.$emit('onMoreClick')
       },
-      onBookClick () {
-        this.$emit('onBookClick')
+      onBookClick (book) {
+        this.$emit('onBookClick', book)
       }
     }
   }
@@ -209,7 +209,7 @@
               color: #212832;
               font-size: 16px;
               line-height: 22.5px;
-              font-weight: 550;
+              font-weight: 500;
             }
             .category-num{
               color: #616161;
