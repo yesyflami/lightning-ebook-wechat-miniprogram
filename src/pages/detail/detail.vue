@@ -16,13 +16,14 @@
       @readBook="readBook"
     />
     <DetailBottom
-
+      :is-in-shelf="isInShelf"
+      @handleShelf="handleShelf"
     />
   </div>
 </template>
 
 <script>
-  import {bookContents, bookDetail, bookIsInShelf, bookRankSave} from '../../api'
+  import {bookContents, bookDetail, bookIsInShelf, bookRankSave, bookShelfRemove, bookShelfSave} from '../../api'
   import {getStorageSync} from '../../api/wechat'
   import DetailBook from '../../components/detail/DetailBook'
   import DetailStat from '../../components/detail/DetailStat'
@@ -35,10 +36,31 @@
     data () {
       return {
         book: {},
-        contents: []
+        contents: [],
+        isInShelf: false
       }
     },
     methods: {
+      handleShelf () {
+        const openId = getStorageSync('openId')
+        const {fileName} = this.$route.query
+        if (!this.isInShelf) {
+          const openId = getStorageSync('openId')
+          const {fileName} = this.$route.query
+          bookShelfSave({openId, fileName}).then(this.getBookIsInShelf())
+        } else {
+          const vue = this
+          mpvue.showModal({
+            title: '提示',
+            content: `是否将《${this.book.title}》移出书架`,
+            success (res) {
+              if (res.confirm) {
+                bookShelfRemove({openId, fileName}).then(vue.getBookIsInShelf())
+              }
+            }
+          })
+        }
+      },
       readBook (href) {
         console.log(href)
       },
@@ -74,7 +96,10 @@
         const openId = getStorageSync('openId')
         const {fileName} = this.$route.query
         if (openId && fileName) {
-          bookIsInShelf({openId, fileName}).then(response => {})
+          bookIsInShelf({openId, fileName}).then(response => {
+            const {data} = response.data
+            data.length === 0 ? this.isInShelf = false : this.isInShelf = true
+          })
         }
       }
     },
