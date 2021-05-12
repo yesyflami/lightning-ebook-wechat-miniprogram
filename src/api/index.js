@@ -56,7 +56,7 @@ export function bookContents (params) {
   return get(`${API_URL}book/contents`, params)
 }
 
-export function bookIsInShelf (params) {
+export function bookShelf (params) {
   return get(`${API_URL}book/shelf/get`, params)
 }
 
@@ -78,4 +78,8 @@ export function searchList (params) {
 
 export function categoryList () {
   return get(`${API_URL}book/category/list/v2`)
+}
+
+export function userDay (params) {
+  return get(`${API_URL}user/day`, params)
 }

@@ -18,12 +18,13 @@
     <DetailBottom
       :is-in-shelf="isInShelf"
       @handleShelf="handleShelf"
+      @readBook="readBook"
     />
   </div>
 </template>
 
 <script>
-  import {bookContents, bookDetail, bookIsInShelf, bookRankSave, bookShelfRemove, bookShelfSave} from '../../api'
+  import {bookContents, bookDetail, bookShelf, bookRankSave, bookShelfRemove, bookShelfSave} from '../../api'
   import {getStorageSync} from '../../api/wechat'
   import DetailBook from '../../components/detail/DetailBook'
   import DetailStat from '../../components/detail/DetailStat'
@@ -62,7 +63,24 @@
         }
       },
       readBook (href) {
-        console.log(href)
+        const query = {
+          fileName: this.book.fileName,
+          opf: this.book.opf
+        }
+        if (href) {
+          const index = href.indexOf('/')
+          if (index >= 0) {
+            query.navigation = href.slice(index + 1)
+          } else {
+            query.navigation = href
+          }
+        }
+        if (this.book && this.book.fileName) {
+          this.$router.push({
+            path: '/pages/read/main',
+            query
+          })
+        }
       },
       onRateChange (value) {
         const openId = getStorageSync('openId')
@@ -96,7 +114,7 @@
         const openId = getStorageSync('openId')
         const {fileName} = this.$route.query
         if (openId && fileName) {
-          bookIsInShelf({openId, fileName}).then(response => {
+          bookShelf({openId, fileName}).then(response => {
             const {data} = response.data
             data.length === 0 ? this.isInShelf = false : this.isInShelf = true
           })
