@@ -11,7 +11,7 @@
         :focus="focus"
         :disabled="disabled"
         :maxlength="limit"
-        :placeholder="hotSearch.length === 0 ? '搜索' : hotSearch"
+        placeholder="搜索"
         v-model="searchWord"
         @input="onChange"
         confirm-type="search"

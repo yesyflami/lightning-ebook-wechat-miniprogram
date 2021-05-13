@@ -117,8 +117,6 @@
       this.userInfo = getStorageSync('userInfo')
       const openId = getStorageSync('openId')
       bookShelf({openId}).then(response => {
-        console.log('shelf', response.data.data.length)
-        console.log(this.readNum)
         this.readNum = response.data.data.length
       })
     }
