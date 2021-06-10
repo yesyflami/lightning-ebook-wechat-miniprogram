@@ -13,26 +13,26 @@
       </div>
       <div class="detail-stat-rate-hint">{{rankNum}}人点评</div>
     </div>
-    <div class="detail-stat-r">
-      <div class="detail-stat-num-wrapper">
-        <span class="detail-stat-num">{{readerNum}}</span>
-        次访问
-      </div>
-      <div class="detail-stat-readers">
-        <div
-          class="detail-stat-readers-avatar"
-          v-for="(reader, index) in readers"
-          :key="index"
-        >
-          <ImageView
-            :src="reader.avatarUrl"
-            mode="scaleToFill"
-            height="100%"
-            round
-          ></ImageView>
-        </div>
-      </div>
-    </div>
+<!--    <div class="detail-stat-r">-->
+<!--      <div class="detail-stat-num-wrapper">-->
+<!--        <span class="detail-stat-num">{{readerNum}}</span>-->
+<!--        次访问-->
+<!--      </div>-->
+<!--      <div class="detail-stat-readers">-->
+<!--        <div-->
+<!--          class="detail-stat-readers-avatar"-->
+<!--          v-for="(reader, index) in readers"-->
+<!--          :key="index"-->
+<!--        >-->
+<!--          <ImageView-->
+<!--            :src="reader.avatarUrl"-->
+<!--            mode="scaleToFill"-->
+<!--            height="100%"-->
+<!--            round-->
+<!--          ></ImageView>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
